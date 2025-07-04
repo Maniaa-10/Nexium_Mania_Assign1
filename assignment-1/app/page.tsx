@@ -42,10 +42,10 @@ export default function HomePage()
       </form>
 
       {/* Display quotes */}
-      <div className="mt-8 space-y-2 max-w-md text-center">
+      <div className="mt-8 flex flex-col items-center space-y-2 max-w-full overflow-x-auto">
         {results.length > 0 ? (
           results.map((quote, index) => (
-            <p key={index} className="italic text-white mt-4 text-center">“{quote}”</p>
+            <p key={index} className="italic text-white whitespace-nowrap text-center">“{quote}”</p>
           ))
         ) : (
           <p className="text-white text-opacity-60">No quotes found.</p> //incase of no quote in quote lib
