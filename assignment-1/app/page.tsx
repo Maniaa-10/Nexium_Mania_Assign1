@@ -14,10 +14,10 @@ export default function HomePage()
     e.preventDefault()
 
     const matched = quotes
-      .filter((q) => q.topic.toLowerCase() === topic.toLowerCase())
+      .filter((q) =>  q.text.toLowerCase().includes(topic.toLowerCase()))
       .slice(0, 3)
       .map((q) => q.text)
-      
+
     setResults(matched)
   }
 
@@ -45,7 +45,7 @@ export default function HomePage()
       <div className="mt-8 space-y-2 max-w-md text-center">
         {results.length > 0 ? (
           results.map((quote, index) => (
-            <p key={index} className="text-white italic">“{quote}”</p>
+            <p key={index} className="italic text-white mt-4 text-center">“{quote}”</p>
           ))
         ) : (
           <p className="text-white text-opacity-60">No quotes found.</p> //incase of no quote in quote lib
