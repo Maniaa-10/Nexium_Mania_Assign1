@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
+import QuoteCard from "@/components/QuoteCard" //custom component to display quotes
 import { quotes } from "@/lib/quotes"  // added quotes
 
 export default function HomePage() 
@@ -42,14 +43,16 @@ export default function HomePage()
       </form>
 
       {/* Display quotes */}
-      <div className="mt-8 flex flex-col items-center space-y-2 max-w-full overflow-x-auto">
-        {results.length > 0 ? (
-          results.map((quote, index) => (
-            <p key={index} className="italic text-white whitespace-nowrap text-center">“{quote}”</p>
-          ))
-        ) : (
-          <p className="text-white text-opacity-60">No quotes found.</p> //incase of no quote in quote lib
-        )}
+      <div className="mt-8 flex flex-col items-center space-y-2 max-w-full ">
+        {results.length > 0 ?
+          (
+            results.map((quote, index) => (<QuoteCard key={index} text={quote}/>))
+          ) : 
+          (
+            <p className="text-white text-opacity-60">No quotes found.</p>
+          )
+        }
+
       </div>
     </main>
   )
