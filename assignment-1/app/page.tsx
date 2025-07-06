@@ -10,10 +10,11 @@ import { quotes } from "@/lib/quotes"  // added quotes
 export default function HomePage() 
 {
   const [topic, setTopic] = useState("")                // user input
-  const [results, setResults] = useState<string[]>([])  // filtered quotes
+  const [results, setResults] = useState<{ text: string }[]>([])  // filtered quotes
   const inputRef = useRef<HTMLInputElement>(null)
+  const [loading, setLoading] = useState(false); 
 
-    useEffect(() => { inputRef.current?.focus() }, [])
+  useEffect(() => { inputRef.current?.focus() }, [])
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()    // prevent from reloading 
@@ -24,12 +25,15 @@ export default function HomePage()
           return;
         }
 
-    const matched = quotes
-      .filter((q) =>  q.text.toLowerCase().includes(topic.toLowerCase()))
-      .slice(0, 3)
-      .map((q) => q.text)
-
-    setResults(matched)
+      setResults([]);
+      setLoading(true);
+      setTimeout(() => {
+        const matched = quotes
+          .filter((q) => q.text.toLowerCase().includes(topic.toLowerCase()))
+          .slice(0, 3);
+        setResults(matched);
+        setLoading(false);
+      }, 250);
   }
 
   return (
@@ -55,9 +59,12 @@ export default function HomePage()
 
       {/* Display quotes */}
       <div className="mt-8 flex flex-col items-center space-y-2 max-w-full ">
-        {results.length > 0 ?
+        {loading ?
           (
-            results.map((quote, index) => (<QuoteCard key={index} text={quote}/>))
+              <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-white"></div>
+          ) : results.length > 0 ?
+          (
+            results.map((quote, index) => <QuoteCard key={index} text={quote.text} />)
           ) : 
           (
             <p className="text-white text-opacity-60">No quotes found.</p>
