@@ -16,7 +16,13 @@ export default function HomePage()
     useEffect(() => { inputRef.current?.focus() }, [])
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault()    // prevent from reloading 
+
+      if (!topic.trim())  // prevent from searching if input string is empty
+        {
+          setResults([]);  // clear previous results
+          return;
+        }
 
     const matched = quotes
       .filter((q) =>  q.text.toLowerCase().includes(topic.toLowerCase()))
