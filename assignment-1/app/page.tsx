@@ -1,15 +1,19 @@
 "use client"
 
-import { useState } from "react"
+import { useRef, useEffect, useState } from "react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import QuoteCard from "@/components/QuoteCard" //custom component to display quotes
 import { quotes } from "@/lib/quotes"  // added quotes
 
+
 export default function HomePage() 
 {
   const [topic, setTopic] = useState("")                // user input
   const [results, setResults] = useState<string[]>([])  // filtered quotes
+  const inputRef = useRef<HTMLInputElement>(null)
+
+    useEffect(() => { inputRef.current?.focus() }, [])
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -28,6 +32,7 @@ export default function HomePage()
 
       <form onSubmit={handleSubmit} className="flex flex-col items-center space-y-4">
         <Input
+          ref={inputRef}
           type="text"
           placeholder="Enter a topic"
           value={topic}
