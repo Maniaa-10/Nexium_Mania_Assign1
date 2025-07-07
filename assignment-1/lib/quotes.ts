@@ -1,5 +1,5 @@
 export const quotes = [
-  { text: "Hi!  I'm Mania Shakeel  — I made this just for you." },
+  { text: "Hi! I'm Mania Shakeel  — I made this just for you." },
   {text: "Success usually comes to those who are too busy to be looking for it." },
   { text: "Don’t be afraid to give up the good to go for the great." },
   { text: "Success is the sum of small efforts repeated day in and day out." },
