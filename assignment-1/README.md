@@ -39,6 +39,7 @@ This project uses [`next/font`](https://nextjs.org/docs/app/building-your-applic
 # On Vercel
 
 check out the following link:
+https://quote-generator-mania.vercel.app/
 
 # Learn More
 
