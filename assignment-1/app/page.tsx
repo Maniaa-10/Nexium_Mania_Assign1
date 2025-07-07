@@ -32,16 +32,17 @@ export default function HomePage()
       setTimeout(() => {
         const matched = quotes
           .filter((q) => q.text.toLowerCase().includes(topic.toLowerCase()))
-          .slice(0, 3);
+          .slice(0, 3);    // resticting to limit 3
         setResults(matched);
         setLoading(false);
-      }, 250);
+      }, 350);
   }
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-6 bg-gradient-to-br from-pink-500 to-teal-400">
-      <h1 className="text-2xl font-bold text-white hover:text-blue-900 mb-4">Quote Generator</h1>
-
+    <main className="flex min-h-screen flex-col items-center justify-start pt-20 p-6 bg-gradient-to-br from-indigo-500 to-teal-400">
+      <h1 className="text-4xl font-extrabold text-white hover:text-blue-900 mb-2 mt-12">Quote Generator</h1>
+      <h2 className="text-blue text-opacity-80 mb-6 text-sm text-center max-w-md mb-8">
+                     One click away from the boost you need</h2>
       <form onSubmit={handleSubmit} className="flex flex-col items-center space-y-4">
         <Input
           ref={inputRef}
@@ -54,14 +55,14 @@ export default function HomePage()
         />
         <Button
           type="submit"
-          className="bg-blue-800 hover:bg-teal-300 text-white hover:text-black font-medium rounded-lg px-6 py-2 transition-colors transition-transform hover:scale-105"
+          className="bg-blue-800 hover:bg-teal-400 text-white hover:text-black font-medium rounded-lg px-6 py-2 transition-colors transition-transform hover:scale-105"
           onClick={() => setHasSearched(true) }
         >
           Get Quotes
         </Button>
       </form>
 
-      {/* Display quotes */}
+      {/* Displaying quotes */}
       <div className="mt-8 flex flex-col items-center space-y-2 max-w-full ">
         {loading ?
           (
