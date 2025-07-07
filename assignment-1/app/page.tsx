@@ -39,7 +39,7 @@ export default function HomePage()
   }
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-6 bg-gradient-to-br from-indigo-500 to-teal-400">
+    <main className="flex min-h-screen flex-col items-center justify-center p-6 bg-gradient-to-br from-pink-500 to-teal-400">
       <h1 className="text-2xl font-bold text-white hover:text-blue-900 mb-4">Quote Generator</h1>
 
       <form onSubmit={handleSubmit} className="flex flex-col items-center space-y-4">
