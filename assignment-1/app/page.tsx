@@ -12,7 +12,9 @@ export default function HomePage()
   const [topic, setTopic] = useState("")                // user input
   const [results, setResults] = useState<{ text: string }[]>([])  // filtered quotes
   const inputRef = useRef<HTMLInputElement>(null)
-  const [loading, setLoading] = useState(false); 
+  const [loading, setLoading] = useState(false);        //loading state
+  const [hasSearched, setHasSearched] = useState(false) // to track the searching
+
 
   useEffect(() => { inputRef.current?.focus() }, [])
 
@@ -44,14 +46,16 @@ export default function HomePage()
         <Input
           ref={inputRef}
           type="text"
+          autoComplete="on"
           placeholder="Enter a topic"
           value={topic}
           onChange={(e) => setTopic(e.target.value)}
-          className="w-64 bg-white border-blue-800 rounded-lg px-4 py-2"
+          className="w-[90vw] max-w-xs bg-white border-blue-800 rounded-lg px-4 py-2"
         />
         <Button
           type="submit"
-          className="bg-blue-800 hover:bg-teal-300 text-white hover:text-black font-medium rounded-lg px-6 py-2 transition-colors"
+          className="bg-blue-800 hover:bg-teal-300 text-white hover:text-black font-medium rounded-lg px-6 py-2 transition-colors transition-transform hover:scale-105"
+          onClick={() => setHasSearched(true) }
         >
           Get Quotes
         </Button>
@@ -65,13 +69,24 @@ export default function HomePage()
           ) : results.length > 0 ?
           (
             results.map((quote, index) => <QuoteCard key={index} text={quote.text} />)
-          ) : 
+          ) : hasSearched ?
           (
             <p className="text-white text-opacity-60">No quotes found.</p>
-          )
+          ) : null
         }
 
       </div>
+      <button
+        onClick={() => 
+          {setResults([])
+          setTopic("")
+          setHasSearched(false)
+        }
+          }
+        className="fixed bottom-4 right-4 bg-blue-600 hover:bg-teal-400 text-white rounded-full px-4 py-2 shadow-lg transition-all"
+      >
+        Home
+    </button>
     </main>
   )
 }
